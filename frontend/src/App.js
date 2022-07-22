@@ -1,22 +1,27 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import layout from './hocs/Layout'
+import Layout from './hocs/Layout';
 import Home from './components/Home';
-import Category from './components/Category';
-import BlogDetail from './components/BlogDetail';
 import Blog from './components/Blog';
-import Navbar from './components/Navbar';
+import BlogDetail from './components/BlogDetail';
+import Category from './components/Category';
+import { useParams } from 'react-router-dom';
 
-const App = () => (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/blog/' element={<Blog />}></Route>
-        <Route path='/category/:id/' element={<Category />}></Route>
-        <Route path='/blog/:id/' element={<BlogDetail />}></Route>
-      </Routes>
-    </Router>
-)
+const App = () => {
+    const params = useParams()
+
+    return (
+        <Router>
+            <Layout>
+                <Routes>
+                    <Route exact path='/' element={<Home />} />
+                    <Route exact path='/blog' element={<Blog />} />
+                    <Route exact path='/category/:id' element={<Category />} />
+                    <Route exact path='/blog/:id' element={<BlogDetail />} />
+                </Routes>
+            </Layout>
+        </Router>
+    )
+};
 
 export default App;
